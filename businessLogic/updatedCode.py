@@ -8,8 +8,8 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 import os
 
 
-client_id = "182560"  
-client_secret = '4eb9fdaa7b1d93f63282327ebb362e3786744901'
+client_id = ""  
+client_secret = ''
 redirect_uri = "http://localhost:8051/oauth2callback"
 scope = ["read", "activity:read_all"]
 apiendpoint= "https://www.strava.com/api/v3/athlete/activities?before=7&after=7&page=1&per_page=10"

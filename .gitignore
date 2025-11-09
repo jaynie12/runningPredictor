@@ -6,6 +6,19 @@ __pycache__/
 # C extensions
 *.so
 
+#files
+
+\data\merged_output.csv
+\data\mergedfile.csv
+\data\run_ww_2019_d.csv
+\data\run_ww_2019_m.csv
+\data\run_ww_2019_q.csv
+\data\run_ww_2019_w.csv
+\data\run_ww_2020_d.csv
+\data\run_ww_2020_m.csv
+\data\run_ww_2020_q.csv
+\data\run_ww_2020_w.csv
+
 # Distribution / packaging
 .Python
 build/
@@ -205,3 +218,46 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+data/merged_output.csv
+data/mergedfile.csv
+<<<<<<< HEAD
+fairlens-env/pyvenv.cfg
+fairlens-env/Scripts/activate
+fairlens-env/Scripts/deactivate.bat
+fairlens-env/Scripts/activate.bat
+fairlens-env/Scripts/Activate.ps1
+fairlens-env/Scripts/f2py.exe
+fairlens-env/Scripts/fonttools.exe
+fairlens-env/Scripts/pip.exe
+fairlens-env/Scripts/pip3.10.exe
+fairlens-env/Scripts/pip3.11.exe
+fairlens-env/Scripts/pip3.exe
+fairlens-env/Scripts/pyftmerge.exe
+fairlens-env/Scripts/pyftsubset.exe
+fairlens-env/Scripts/python.exe
+fairlens-env/Scripts/pythonw.exe
+fairlens-env/Scripts/ttx.exe
+fairlens-env/share/man/man1/ttx.1
+.vscode/settings.json
+frontEnd/globalVariables.py
+=======
+data/merged_output.csv
+data/mergedfile.csv
+data/run_ww_2019_d.csv
+data/run_ww_2019_m.csv
+data/run_ww_2019_q.csv
+data/run_ww_2019_w.csv
+data/run_ww_2020_d.csv
+data/run_ww_2020_m.csv
+data/run_ww_2020_q.csv
+data/run_ww_2020_w.csv
+data/merged_output.csv
+data/mergedfile.csv
+data/run_ww_2019_d.csv
+data/run_ww_2019_m.csv
+data/run_ww_2019_q.csv
+data/run_ww_2019_w.csv
+data/run_ww_2020_d.csv
+data/run_ww_2020_m.csv
+data/run_ww_2020_q.csv
+data/run_ww_2020_w.csv
