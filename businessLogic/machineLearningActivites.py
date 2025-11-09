@@ -42,14 +42,14 @@ class machineLearningUtils():
 
     def addToDB(self):
         query = "INSERT INTO activitiesGeneral (distance, duration,gender, age_group) VALUES (%s,%s, %s, %s)"
-        values = (self.distance, np.array(self.predictedTime()).item(), self.gender, self.age)
+        values = (self.distance, np.array(self.predictModel()).item(), self.gender, self.age)
         databaseUtils().writeToDb(query,values)
-        trainModel().partialTraining(self.model, self.createNpArray(), self.predictedTime())
+        trainModel().partialTraining(self.model, self.createNpArray(), self.predictModel())
 
 if __name__=='__main__':
-    selfLearning = machineLearningUtils(6,'55 +','M').predictModel()
+    selfLearning = machineLearningUtils(6,'55 +','M').addToDB()
     print(selfLearning)
 
-                #print('PREDICTED TIME BEFORE:  '  + str(predictedTime))
-            #print('PREDICTED TIME AFTER:  '  + str(newPredictedTime))
+   # print('PREDICTED TIME BEFORE:  '  + str(predictedTime))
+    #print('PREDICTED TIME AFTER:  '  + str(newPredictedTime))
     #newPredictedTime = function(self)

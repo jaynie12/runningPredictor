@@ -38,6 +38,10 @@ if 'weather' not in st.session_state:
 if 'elevation' not in st.session_state:
     st.session_state.elevation = None
 
+age_group_value = ''
+total_distance_Value= 0
+gender_label_value = ''
+
 def set_total_distance(total_distance,age_group,gender):
     st.session_state["route_data"] = total_distance
     if gender=='Male':
@@ -46,26 +50,28 @@ def set_total_distance(total_distance,age_group,gender):
         gender_label = 'F'
     st.session_state["gender"]=gender
     st.session_state['age_group']=age_group
+    global age_group_value
+    age_group_value = st.session_state['age_group']
+    global gender_label_value
+    gender_label_value= gender_label
     if st.session_state["route_data"]['all_drawings'] == None:
         st.write('Please plot a route before submitting')
     else:
         distanceElevation = calculateDistanceClass(total_distance['all_drawings']).calculateDistanceEvaluate()
-        st.session_state["total_distance"] = str(round(int(distanceElevation[0]), 2)) + ' km'
-        if str(distanceElevation[1]) == None:
+        print( str(round(int(distanceElevation[0]), 3)) + ' km')
+        global total_distance_Value 
+        total_distance_Value = distanceElevation[0]
+        st.session_state["total_distance"] = str(round(int(distanceElevation[0]), 3)) + ' km'
+
+        if str(distanceElevation[1]) =='None' or str(distanceElevation[1]) == 0:
             elevation = 0
         else:
-            elevation = str(round(int(elevation[0]), 2))
-        st.session_state["elevation"] = elevation + ' m'
+            elevation = (round(int(distanceElevation[1])), 2)
+        st.session_state["elevation"] = str(elevation) + ' m'
         predictedTime = machineLearningUtils(distanceElevation[0],age_group,gender_label).predictModel()
-        st.session_state["predicted_time_input"] = str(round(int(predictedTime[0]), 2)) + '  minutes'
-        feedback = st.feedback(options="thumbs",width="content")
-        if feedback == 1:
-            machineLearningUtils.addToDB(distanceElevation[0],age_group,gender_label,predictedTime)
-        st.session_state["weather"] = weatherClass().runEvent()
-        
+        st.session_state["predicted_time_input"] = str(round(int(predictedTime[0]), 2)) + ' minutes'
+        #st.session_state["weather"] = weatherClass().runEvent()
 
-def refresh_data():
-    pass
 with col1:
     with st.form("my_form"):
         output = st_folium(m, width=2000 , height = 500) #OUTPUTTING THE MAP
@@ -77,9 +83,13 @@ with col2:
     weather= st.text_input('Weather information', key="weather" , disabled=True, label_visibility="visible", width=200)
     elevation= st.text_input('Route Elevation', key="elevation" , disabled=True, label_visibility="visible", width=200)
     predicted_time_input =st.text_input('Predicted time', key="predicted_time_input" , disabled=True, label_visibility="visible", width="stretch")
-    st.button( "Pull recent Strava data",key="refresh",help="Pull the latest records from your Strava account",
-              use_container_width=True, on_click=refresh_data, args=(True),kwargs={"limit": 500},)
-
-
+    if st.session_state.predicted_time_input:
+        sentiment_mapping = [":material/thumb_down:", ":material/thumb_up:"]
+        selected = st.feedback("thumbs")
+        if selected is not None:
+                st.markdown(f"You selected: {sentiment_mapping[selected]}")
+                print('HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
+                print(str(age_group_value))
+                machineLearningUtils(total_distance_Value, age_group_value, gender_label_value).addToDB()
 
 
