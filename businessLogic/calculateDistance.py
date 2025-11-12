@@ -6,12 +6,10 @@ class calculateDistanceClass():
 
     def __init__(self,coordinatesList):
         self.coordinates = coordinatesList
-        print('HERE  ' + str(coordinatesList))
     
     def calculateDistance(self,geometryList):
             df=pd.DataFrame(data=geometryList,columns=['LONGITUDE', 'LATITUDE'])
             dist=[0]
-            print('HEREE ' + str(df) + '   HEREE  ' + str(len(df)))
             for i in range(1,len(df)):
                 dist.append(
                     geopy.distance.geodesic(
@@ -25,6 +23,14 @@ class calculateDistanceClass():
             return totalGeometryDistance   
      
     def calculateDistanceEvaluate(self):
+        """
+        Main entry point to calculating the distance and elevation
+        If there is onlly one set of lines plotted on the map, there will only be one set
+        of co-ordinates
+        Else, we must iterate through each segment of our route, find each distance/elevation
+        separately and then add them all together
+
+        """
         if (len(self.coordinates) ==1):
             totalGeoDistance =  self.calculateDistance(self.coordinates[0]['geometry']['coordinates'])
             totalElevationMultiple = self.calculateElevation(self.coordinates[0]['geometry']['coordinates'])
@@ -47,7 +53,7 @@ class calculateDistanceClass():
             if response.status_code == 200:
                 elevationAnswer = elevationAnswer+ response.json()['results'][0]['elevation']
             else:
-                return None
+                return 0
             
 if __name__ == '__main__':
     answer = {

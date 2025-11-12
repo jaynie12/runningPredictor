@@ -9,6 +9,7 @@ import numpy as np
 
 class machineLearningUtils():
     def __init__(self,distance,age,gender):
+        print('AGGEEEEEEEE  '  + age)
         self.labelsGender = {'M': np.int64(1), 'F': np.int64(0)}
         self.labelsAgeGroup= {'35 - 54': np.int64(1), '18 - 34': np.int64(0), '55 +': np.int64(2)}
         self.distance = int(distance)
@@ -44,6 +45,9 @@ class machineLearningUtils():
         query = "INSERT INTO activitiesGeneral (distance, duration,gender, age_group) VALUES (%s,%s, %s, %s)"
         values = (self.distance, np.array(self.predictModel()).item(), self.gender, self.age)
         databaseUtils().writeToDb(query,values)
+        print("AGE VALUE:", repr(self.age))
+        print("AVAILABLE KEYS:", self.labelsAgeGroup.keys())
+
         trainModel().partialTraining(self.model, self.createNpArray(), self.predictModel())
 
 if __name__=='__main__':
