@@ -1,0 +1,10 @@
+Testing plan:
+
+1. Submit the route without anything on the map -  validate an error returns back
+2. Draw a route, enter the age group and gender. Press submit and validate that the elevation ,weather, and route 
+gets populated on the web page
+3. Validate that you can interact with the thumbs up and thumbs down buttons that appear once the 
+route information has been populated
+4. Validate that you can zoom out and in with the map and can break up your route into segments
+5. Repeat for a range of age groups and genders so that we can prove that the time taken to create the route
+varies accross the different categories
