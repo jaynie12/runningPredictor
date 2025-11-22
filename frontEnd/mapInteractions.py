@@ -70,7 +70,7 @@ def set_total_distance(total_distance,age_group,gender):
         st.session_state["elevation"] = str(elevation) + ' m'
         predictedTime = machineLearningUtils(distanceElevation[0],age_group,gender_label).predictModel()
         st.session_state["predicted_time_input"] = str(round(int(predictedTime[0]), 2)) + ' minutes'
-        #st.session_state["weather"] = weatherClass().runEvent()
+        st.session_state["weather"] = weatherClass().runEvent()
 
 with col1:
     with st.form("my_form"):
