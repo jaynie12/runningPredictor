@@ -45,15 +45,16 @@ class calculateDistanceClass():
 
     def calculateElevation(self, geometryList):
         elevationAnswer =0
-        print(elevationAnswer)
         for i in range(0,len(geometryList) -1):
+            print(geometryList[i])
             url = 'https://api.open-elevation.com/api/v1/lookup'
-            params = {'locations': f"{geometryList[1]},{geometryList[0]}"}
+            params = {'locations': f"{geometryList[i][1]},{geometryList[i][0]}"}
             response = requests.get(url, params=params)
             if response.status_code == 200:
+                print(str(response.json()['results'][0]['elevation']))
                 elevationAnswer = elevationAnswer+ response.json()['results'][0]['elevation']
-            else:
-                return 0
+        print(elevationAnswer)
+        return elevationAnswer
             
 if __name__ == '__main__':
     answer = {

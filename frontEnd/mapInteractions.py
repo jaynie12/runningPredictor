@@ -66,11 +66,11 @@ def set_total_distance(total_distance,age_group,gender):
         if str(distanceElevation[1]) =='None' or str(distanceElevation[1]) == 0:
             elevation = 0
         else:
-            elevation = round(int(distanceElevation[1]), 2)
+            elevation = round(int(distanceElevation[1]), 10)
         st.session_state["elevation"] = str(elevation) + ' m'
         predictedTime = machineLearningUtils(distanceElevation[0],age_group,gender_label).predictModel()
         st.session_state["predicted_time_input"] = str(round(int(predictedTime[0]), 2)) + ' minutes'
-        st.session_state["weather"] = weatherClass().runEvent()
+        st.session_state["weather"] = '9 degrees'
 
 with col1:
     with st.form("my_form"):
