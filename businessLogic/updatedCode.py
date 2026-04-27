@@ -22,7 +22,6 @@ import json
 def initial_authorisation_token():
    
   # send request to server to authorize a user
-  # this will prompt the user to sign into strava and grant our application permissions
   request_url = f'http://www.strava.com/oauth/authorize?client_id={client_id}' \
                         f'&response_type=code&redirect_uri={redirect_uri}' \
                         f'&approval_prompt=force' \
