@@ -1,6 +1,6 @@
+import os
 import joblib
 import numpy as np
-import os
 
 
 class machineLearningUtils:
@@ -17,7 +17,7 @@ class machineLearningUtils:
         model_path = os.path.join(BASE_DIR, "sgdModelV2.pkl")
 
         if not os.path.exists(model_path):
-            raise FileNotFoundError(f"Model file not found: {model_path}")
+            raise FileNotFoundError(f"Model file not found at: {model_path}")
 
         self.model = joblib.load(model_path)
 
@@ -28,4 +28,5 @@ class machineLearningUtils:
             self.labelsAgeGroup[self.age]
         ]])
 
-        return self.model.predict(features)[0]
+        prediction = self.model.predict(features)[0]
+        return float(prediction)
