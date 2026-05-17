@@ -9,7 +9,6 @@ import numpy as np
 
 class machineLearningUtils():
     def __init__(self,distance,age,gender):
-        print('AGGEEEEEEEE  '  + age)
         self.labelsGender = {'M': np.int64(1), 'F': np.int64(0)}
         self.labelsAgeGroup= {'35 - 54': np.int64(1), '18 - 34': np.int64(0), '55 +': np.int64(2)}
         self.distance = int(distance)
@@ -17,7 +16,6 @@ class machineLearningUtils():
         self.gender = gender
         project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
         model_path = os.path.join(project_root, "businessLogic", "sgdModelV2.pkl")
-        print("Looking for model at:", model_path)
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"Model file not found at: {model_path}")
         self.model = joblib.load(open(str(model_path), 'rb'))

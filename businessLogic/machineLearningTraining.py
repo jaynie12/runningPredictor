@@ -24,8 +24,6 @@ class trainModel():
         le_gender = LabelEncoder()
         le_age_group = LabelEncoder()
         gender_map = le_gender.fit_transform(self.df['gender'])
-        #print(le_gender.classes_)
-        #print(self.df['gender'])
         age_group_map = le_age_group.fit_transform(self.df['age_group'])
         gender_labels = dict(zip(self.df['gender'], gender_map))
         # get the mapping between the original labels and encoded labels
@@ -33,7 +31,6 @@ class trainModel():
 
         self.df['age_group'] = age_group_map
         self.df['gender'] = gender_map
-        #print(le_age_group.classes_)
         return gender_labels,age_group_labels
 
 
@@ -53,20 +50,12 @@ class trainModel():
         rmse = np.sqrt(mse) 
         r2 = r2_score(y_test, y_pred)
         
-        print(X_test)
-        print(f"Model Performance:")
-        print(f"- RMSE: {rmse:.2f}")
-        print(f"- R² Score: {r2:.2f}")
 
 
         avg_expected_loss, avg_bias, avg_var = bias_variance_decomp(
                 self.model, X_train.values, y_train.values, X_test.values, y_test.values, 
                 loss='0-1_loss',
                 random_seed=123)
-
-        print('Average expected loss--After pruning: %.3f' % avg_expected_loss)
-        print('Average bias--After pruning: %.3f' % avg_bias)
-        print('Average variance--After pruning: %.3f' % avg_var)
 
         databaseUtils().closeConnection()
 
