@@ -7,7 +7,7 @@ class databaseUtils():
     def __init__(self):
         self.database="runnersData"#enter your database name
         self.user='postgres'#enter your postgres username
-        self.password='poopoo32'#enter your password
+        self.password=''#enter your password
         self.host='localhost'#enter your host name
         self.port='5432'#port number
 

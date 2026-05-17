@@ -95,9 +95,4 @@ with col2:
         selected = st.feedback("thumbs")
         if selected is not None:
                 st.markdown(f"You selected: {sentiment_mapping[selected]}")
-                machineLearningUtils(
-                        st.session_state["total_distance_value"],
-                        st.session_state["age_group"],
-                        st.session_state["gender_label_value"]
-                    ).addToDB()
 
