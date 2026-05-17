@@ -14,8 +14,10 @@ class machineLearningUtils():
         self.distance = int(distance)
         self.age = age
         self.gender = gender
-        project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
-        model_path = os.path.join(project_root, "businessLogic", "sgdModelV2.pkl")
+       # project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
+        #model_path = os.path.join(project_root, "businessLogic", "sgdModelV2.pkl")
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(BASE_DIR, "sgdModelV2.pkl")
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"Model file not found at: {model_path}")
         self.model = joblib.load(open(str(model_path), 'rb'))
