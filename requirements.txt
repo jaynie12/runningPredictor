@@ -15,7 +15,6 @@ cycler
 dcor
 elevation
 etils
-fairlens
 fasteners
 flatbuffers
 flax
