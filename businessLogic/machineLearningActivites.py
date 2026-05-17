@@ -14,6 +14,7 @@ class machineLearningUtils():
         self.distance = int(distance)
         self.age = age
         self.gender = gender
+        
        # project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
         #model_path = os.path.join(project_root, "businessLogic", "sgdModelV2.pkl")
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
