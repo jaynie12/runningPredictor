@@ -1,3 +1,5 @@
+setuptools
+wheel
 absl-py
 aiohttp
 aiosignal
@@ -45,7 +47,7 @@ opt_einsum
 optax
 optree
 packaging
-pandas
+pandas==2.1.4
 pg8000
 psycopg2-binary
 pygad
