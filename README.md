@@ -2,6 +2,12 @@
 Based on a dataset taken from Kaggle, you can draw a route,enter your age and gender and receive a rough prediction as to how long it will take you to run the route.
 The running predictor helps runners plot a route and displays an estimated time to complete  it, based on age and gender specific averages for the distance drawn. As a reference, the  application also shows the route's elevation and total distance.  
 
+**Main functions**
+
+- Explore areas and plot a route
+- Enter age and gender to recieve an estimate of how long it will take you to run that route
+- Recieve information on the elevation of the route
+
 **Usefulness**
 In terms of cost, time, or effort, this application saves users time and effort when planning 
 their workouts, improving productivity.    
