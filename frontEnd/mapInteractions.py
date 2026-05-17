@@ -74,7 +74,7 @@ def set_total_distance(total_distance,age_group,gender):
         age_group,
         gender_label
     ).predictModel()
-    st.session_state["predicted_time_input"] = f"{round(predicted_time, 2)} minutes"
+    st.session_state["predicted_time_input"] = f"{round(predictedTime, 2)} minutes"
     st.session_state["weather"] = '9 degrees'
 
 with col1:
