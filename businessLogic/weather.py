@@ -2,7 +2,6 @@ import python_weather
 
 import asyncio
 import os
-import datetime
 
 class weatherClass():
 
