@@ -38,46 +38,53 @@ if 'weather' not in st.session_state:
 if 'elevation' not in st.session_state:
     st.session_state.elevation = None
 
-age_group_value = ''
-total_distance_Value= 0
-gender_label_value = ''
-
 def set_total_distance(total_distance,age_group,gender):
     st.session_state["route_data"] = total_distance
+
     if gender=='Male':
         gender_label = 'M'
     else:
         gender_label = 'F'
-    st.session_state["gender"]=gender
-    st.session_state['age_group']=age_group
-    global age_group_value
-    age_group_value = st.session_state['age_group']
-    global gender_label_value
-    gender_label_value= gender_label
+
+    st.session_state["age_group"] = age_group
+    st.session_state["gender"] = gender
+    st.session_state["gender_label_value"] = gender_label
+
+
+
     if st.session_state["route_data"]['all_drawings'] == None:
         st.write('Please plot a route before submitting')
-    else:
-        distanceElevation = calculateDistanceClass(total_distance['all_drawings']).calculateDistanceEvaluate()
-        print( str(round(int(distanceElevation[0]), 3)) + ' km')
-        global total_distance_Value 
-        total_distance_Value = distanceElevation[0]
-        st.session_state["total_distance"] = str(round(int(distanceElevation[0]), 3)) + ' km'
+        return
+ 
+    distanceElevation = calculateDistanceClass(total_distance['all_drawings']).calculateDistanceEvaluate()
+    total_distance_Value = float(distanceElevation[0])
+    st.session_state["total_distance_value"] = total_distance_Value
 
-        if str(distanceElevation[1]) =='None' or str(distanceElevation[1]) == 0:
-            elevation = 0
-        else:
-            elevation = round(int(distanceElevation[1]), 2)
-        st.session_state["elevation"] = str(elevation) + ' m'
-        predictedTime = machineLearningUtils(distanceElevation[0],age_group,gender_label).predictModel()
-        st.session_state["predicted_time_input"] = str(round(int(predictedTime[0]), 2)) + ' minutes'
-        st.session_state["weather"] = '9 degrees'
+    st.session_state["total_distance"] = str(round(total_distance_Value, 3)) + ' km'
+
+    if str(distanceElevation[1]) == 'None' or str(distanceElevation[1]) == 0:
+        elevation = 0
+    else:
+        elevation = float(distanceElevation[1])
+
+    st.session_state["elevation"] = str(round(elevation, 2)) + ' m'
+
+    predictedTime = machineLearningUtils(
+        total_distance_Value,
+        age_group,
+        gender_label
+    ).predictModel()
+    st.session_state["predicted_time_input"] = str(round(int(predictedTime[0]), 2)) + ' minutes'
+    st.session_state["weather"] = '9 degrees'
 
 with col1:
+    output = st_folium(m, width=2000 , height = 500) #OUTPUTTING THE MAP
     with st.form("my_form"):
-        output = st_folium(m, width=2000 , height = 500) #OUTPUTTING THE MAP
         age_group = st.selectbox('Age Group', ['18 - 34','35 - 54','55 +'])
         gender = st.selectbox('Gender', ['Female','Male'])
-        st.form_submit_button('Submit Route' , key='Submit', on_click=set_total_distance, args=[output,age_group,gender])
+        submitted = st.form_submit_button('Submit Route' , key='Submit')
+    if submitted:
+        set_total_distance(output, age_group, gender)
 with col2:
     total_distance= st.text_input('Total Distance', key="total_distance" , disabled=True, label_visibility="visible", width="stretch")
     weather= st.text_input('Weather information', key="weather" , disabled=True, label_visibility="visible", width=200)
@@ -88,8 +95,9 @@ with col2:
         selected = st.feedback("thumbs")
         if selected is not None:
                 st.markdown(f"You selected: {sentiment_mapping[selected]}")
-                print('HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
-                print(str(age_group_value))
-                machineLearningUtils(total_distance_Value, age_group_value, gender_label_value).addToDB()
-
+                machineLearningUtils(
+                        st.session_state["total_distance_value"],
+                        st.session_state["age_group"],
+                        st.session_state["gender_label_value"]
+                    ).addToDB()
 
